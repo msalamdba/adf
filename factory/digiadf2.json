@@ -1,0 +1,9 @@
+{
+	"name": "digiadf2",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "38054eb3-f033-40c9-b973-108f32216f84",
+		"tenantId": "fd923c24-e302-4fa0-8911-1119dac8e93a"
+	}
+}

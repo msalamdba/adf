@@ -1,0 +1,16 @@
+{
+	"name": "SqlServerLinkedService",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=alam-mini;initial catalog=adfv2tutorial;user id=sa",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJmZTdmYjg3My1jNDFmLTQ1ZjYtOTc1MC1jMzY4MDlmMTc5MWUiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "TutorialIntegrationRuntime2",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
