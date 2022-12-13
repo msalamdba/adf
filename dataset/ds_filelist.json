@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileSystem": "nyc-taxi-raw"
+				"fileSystem": "adfv2tutorial"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
