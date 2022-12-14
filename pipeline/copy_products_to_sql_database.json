@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy product data",
+				"name": "Copy products to db",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -18,9 +18,8 @@
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
-							"wildcardFolderPath": "digisource",
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": false,
 							"wildcardFileName": "*.csv",
 							"enablePartitionDiscovery": false
 						},
@@ -39,9 +38,8 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "ProductID",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 1
 								},
 								"sink": {
 									"name": "productId",
@@ -51,9 +49,8 @@
 							},
 							{
 								"source": {
-									"name": "ProductName",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 2
 								},
 								"sink": {
 									"name": "productName",
@@ -63,28 +60,13 @@
 							},
 							{
 								"source": {
-									"name": "Category",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 3
 								},
 								"sink": {
 									"name": "category",
 									"type": "String",
 									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "ListPrice",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "listPrice",
-									"type": "Decimal",
-									"physicalType": "money",
-									"scale": 4,
-									"precision": 19
 								}
 							}
 						],
@@ -107,106 +89,6 @@
 						"type": "DatasetReference"
 					}
 				]
-			},
-			{
-				"name": "Copy products to archive folder",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Copy product data",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
-							"wildcardFolderPath": "digisource",
-							"wildcardFileName": "*.csv",
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
-					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".csv"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "ds_products",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "ds_products",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
-				"name": "Delete1",
-				"type": "Delete",
-				"dependsOn": [
-					{
-						"activity": "Copy products to archive folder",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataset": {
-						"referenceName": "ds_products",
-						"type": "DatasetReference"
-					},
-					"enableLogging": false,
-					"storeSettings": {
-						"type": "AzureBlobFSReadSettings",
-						"recursive": true,
-						"wildcardFileName": "*.*",
-						"enablePartitionDiscovery": false
-					}
-				}
 			}
 		],
 		"annotations": []
