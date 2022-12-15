@@ -1,0 +1,29 @@
+{
+	"name": "ds_excelfile",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blobstorage",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"ds_sheetName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": {
+				"value": "@dataset().ds_sheetName",
+				"type": "Expression"
+			},
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "DigiSales.xlsx",
+				"container": "digiadf"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	}
+}

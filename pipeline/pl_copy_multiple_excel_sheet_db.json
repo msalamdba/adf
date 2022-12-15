@@ -41,40 +41,8 @@
 									"tableOption": "autoCreate",
 									"disableMetricsCollection": false
 								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"typeConversion": true,
-									"typeConversionSettings": {
-										"allowDataTruncation": true,
-										"treatBooleanAsNumber": false
-									}
-								}
-							},
-							"inputs": [
-								{
-									"referenceName": "ds_blob_excel",
-									"type": "DatasetReference",
-									"parameters": {
-										"dsSheetname": {
-											"value": "@item().sheetName",
-											"type": "Expression"
-										}
-									}
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "ds_AzureSqlTable",
-									"type": "DatasetReference",
-									"parameters": {
-										"ds_tableName": {
-											"value": "@item().sheetName",
-											"type": "Expression"
-										}
-									}
-								}
-							]
+								"enableStaging": false
+							}
 						}
 					]
 				}
